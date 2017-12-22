@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="list-group">
+                    {% for promotion in promotions %}
+                        <div class="card-body">
+                            <h5 class="list-group-item text-center">★ ★ ★ {{ promotion.name }} ★ ★ ★</h5>
+                            <div class="list-group-item">
+                                From {{ promotion.startDate|date }}
+                                <h5 class="float-right">
+                                    <a href="{{ path('edit_promotion', {'id':promotion.id}) }}" class="badge badge-primary">Edit Promotion</a>
+                                </h5>
+                            </div>
+                                <div class="list-group-item">
+                                Until {{ promotion.endDate|date }}
+                                <h5 class="float-right">
+                                <a href="{{ path('delete_promotion', {'id':promotion.id}) }}" class="badge badge-danger">Delete Promotion</a>
+                                </h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                {% if is_granted('ROLE_EDITOR') %}
+                    <a href="{{ path('add_promotion') }}" class="btn btn-primary btn-block">Add Promotion</a>
+                    <a href="{{ path('all_products_promo') }}" class="btn btn-primary btn-block">All Products
+                        Promotion</a>
+                    <a href="{{ path('category_promo') }}" class="btn btn-primary btn-block">Category Promotion</a>
+                {% endif %}
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

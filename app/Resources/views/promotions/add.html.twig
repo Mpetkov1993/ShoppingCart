@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Add promotion</h1>
+        <div class="row">
+            <div class="col-lg-4">
+                <br>
+                {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                {{ form_start(form) }}
+                {{ form_row(form.name) }}
+                {{ form_row(form.type) }}
+                {{ form_row(form.discount) }}
+                {{ form_row(form.startDate) }}
+                {{ form_row(form.endDate) }}
+                <button type="submit" class="btn btn-primary btn-block">Add</button>
+                {{ form_end(form) }}
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

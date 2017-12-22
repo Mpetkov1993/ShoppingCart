@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <div class="container">
+        <div class="col-lg-5">
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">User Name</span>
+                <input type="text" class="form-control" disabled="disabled" placeholder="{{ user.username }}">
+            </div>
+            <br>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">User Email</span>
+                <input type="text" class="form-control" disabled="disabled" placeholder="{{ user.email }}">
+            </div>
+            <br>
+            <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">User Cash</span>
+                <input type="text" class="form-control" disabled="disabled" placeholder="{{ user.cash }} BGN">
+            </div>
+            <br><a href="{{ path('edit_profile', {'id':user.id}) }}" class="btn btn-primary btn-block">Edit Profile</a>
+            <br>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+{% block navigation %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ path('homepage') }}">ShopHome</a>
+            <div class="nav-item">
+                <form method="get" class="form-search form-horizontal pull-right" role="search"
+                      action="{{ path('search_products') }}">
+                    <input class="form-control" placeholder="Search" name="name" type="text">
+                    <input class="badge badge-info" value="Search" type="submit">
+                </form>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+
+                    {% if is_granted('ROLE_EDITOR') %}
+                        <div class="dropdown show nav-item active">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Control Panel
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="dropdown-item" href="{{ path('all_users') }}">All Users</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="{{ path('all_promotions') }}">Promotions</a>
+                                <a class="dropdown-item" href="{{ path('category_create') }}">Add Category</a>
+                                <a class="dropdown-item" href="{{ path('product_create') }}">Add Product</a>
+                                <a class="dropdown-item" href="{{ path('out_of_stock') }}">Out of stock Products</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {#<li class="nav-item active">
+                        <a class="nav-link" href="{{ path('homepage') }}">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>#}
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('retail') }}">Retail Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('my_products') }}">My Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('show_cart') }}">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('profile') }}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('register') }}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block messages %}
+    {% for message in app.flashes('notice') %}
+        <div class="text-center alert alert-info">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block cont %}
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright&copy; MPetkov1993<br>2017 @SoftUni</p>
+        </div>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+{% endblock %}
+</body>
+</html>

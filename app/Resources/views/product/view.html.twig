@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-6 col-md-7 mb-5">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" src="{{ product.picture }}" alt=""></a>
+                        <hr>
+                        <div class="card-body">
+                            <h3 class="card-title text-center">{{ product.name }}</h3>
+                            <p class="card-text">{{ product.description }}</p>
+                            <small class="card-text">{{ product.quantity }} available</small>
+                        </div>
+                        <div class="card-footer">
+                            <h6 class="float-right">{{ product.price }} BGN</h6>
+                        </div>
+                        {% if is_granted('ROLE_USER') %}
+                        <div class="card-footer">
+                            <h6><a href="{{ path('cart_add',{'id':product.id}) }}"
+                                   class="btn btn-primary btn-block">Add to cart</a>
+                                <a href="{{ path('add_review',{'id':product.id}) }}"
+                                   class="btn btn-dark btn-block">Rate</a>
+                                {% if is_granted('ROLE_EDITOR') %}
+                                    <h5><a href="{{ path('product_edit',{'id':product.id}) }}"
+                                       class="btn btn-primary col-lg-6 float-left">Edit</a>
+                                <a href="{{ path('product_delete',{'id':product.id}) }}"
+                                   class="btn btn-danger col-lg-6 float-right">Delete</a>{% endif %}</h5></h6>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card h-25 w-50">
+                    {% for review in product.reviews %}
+                        <div class="card-body">
+                            <h3 class="card-title text-center">{{ review.rating }}</h3>
+                            <p class="card-text">{{ review.body }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="card-text float-left">By {{ review.user.username }}&copy;</small>
+                            <small class="card-text float-right">From {{ review.date|date('d/m/Y H:m:s') }}</small>
+                        </div>
+                        {% if is_granted('ROLE_EDITOR') %}
+                            <a href="{{ path('delete_review',{'id':review.id}) }}"
+                               class="badge badge-danger">Delete</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

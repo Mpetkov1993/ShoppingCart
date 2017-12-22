@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-lg-7">
+            <br>
+            <h2 class="text-center">All Users</h2>
+            <br>
+            <div class="list-group">
+                {% for user in users %}
+                    <h5 class="list-group-item font-weight-bold">{{ user.username }} <a href="{{ path('user_products', {'id':user.id}) }}" class="badge badge-success float-right">User products</a><a href="{{ path('change_role',{'id':user.id}) }}" class="badge badge-danger float-right">Edit role</a> <small class="badge badge-info float-right"> {{ user.roles|join('') }} </small></h5><br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<br>
+{% endblock %}
