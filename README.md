@@ -1,3 +1,11 @@
+1. php bin/console doctrine:database:create  
+2. php bin/console doctrine:schema:update  
+3. run shopping_cart.sql  
+
+Admin:  
+name: admin  
+pass: admin  
+
 Shopping cart  
 Required functionalities:  
 •	User registration / login and user profiles.  
