@@ -1,8 +1,9 @@
-1. php bin/console doctrine:database:create  
-2. php bin/console doctrine:schema:update  
-3. run shopping_cart.sql  
+1. composer update  
+2. php bin/console doctrine:database:create  
+3. php bin/console doctrine:schema:update  
+4. run shopping_cart.sql  
 
-Admin:  
+Admin Profile:  
 name: admin  
 pass: admin  
 
